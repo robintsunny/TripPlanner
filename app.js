@@ -3,7 +3,8 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const db = require('./config/keys').mongoURI
 const app = express();
-
+const passport = require('passport');
+require('./config/passport')(passport);
 
 
 
@@ -24,8 +25,7 @@ app.use("/api/events", events);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
-app.get("/", (req, res) => res.send("Robin's Trip Planning App"))
+app.use(passport.initialize());
 
 
 
